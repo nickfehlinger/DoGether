@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core'
+import { Observable } from 'rxjs'
+import { AngularFirestore, DocumentChangeAction } from '@angular/fire/firestore'
+import { Task } from '../models/task'
+import { NewTaskComponent } from './new-task/new-task.component'
 
 @Component({
   selector: 'app-task-list',
@@ -6,10 +10,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./task-list.component.sass']
 })
 export class TaskListComponent implements OnInit {
+  @ViewChild(NewTaskComponent)
+  public buildTask!: NewTaskComponent
+  
+  
+  public tasks: Observable<DocumentChangeAction<Task>[]>
 
-  constructor() { }
+
+  constructor(private store: AngularFirestore) { 
+    this.tasks = store.collection<Task>('tasks').snapshotChanges()
+    }
 
   ngOnInit(): void {
   }
+
+  public createTask(){
+    console.log(this.buildTask)
+    this.buildTask.show()
+  }
+
 
 }

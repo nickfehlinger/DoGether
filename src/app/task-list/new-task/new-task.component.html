@@ -1,0 +1,7 @@
+<div [hidden]="hidden">
+    <form [formGroup]="task">
+        <label for="title">Add a task</label>
+        <input type="text" formControlName='title' placeholder="New Task">
+        <button (click)="newTask()">Add</button>
+    </form>
+</div>

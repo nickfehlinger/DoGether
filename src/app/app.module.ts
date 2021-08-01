@@ -1,19 +1,25 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
-import { TaskComponent } from './task/task.component';
-import { TaskListComponent } from './task-list/task-list.component';
+import { NgModule } from '@angular/core'
+import { BrowserModule } from '@angular/platform-browser'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { AppRoutingModule } from './app-routing.module'
+import { AppComponent } from './app.component'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { ServiceWorkerModule } from '@angular/service-worker'
+import { environment } from '../environments/environment'
+import { TaskListComponent } from './task-list/task-list.component'
+import { AngularFireModule } from '@angular/fire'
+import { AngularFireAnalyticsModule } from '@angular/fire/analytics'
+import { AngularFirestoreModule } from '@angular/fire/firestore'
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { NewTaskComponent } from './task-list/new-task/new-task.component';
+import { TaskCardComponent } from './task-list/task-card/task-card.component'
 
 @NgModule({
   declarations: [
     AppComponent,
-    TaskComponent,
-    TaskListComponent
+    TaskListComponent,
+    NewTaskComponent,
+    TaskCardComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +31,12 @@ import { TaskListComponent } from './task-list/task-list.component';
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAnalyticsModule,
+    AngularFirestoreModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

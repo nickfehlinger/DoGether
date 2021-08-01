@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "dogether-97cbe": {
+      "hosting": {
+        "DoGether": [
+          "dogether-97cbe"
+        ]
+      }
+    }
+  }
+}
