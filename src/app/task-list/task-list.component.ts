@@ -25,7 +25,6 @@ export class TaskListComponent implements OnInit {
   }
 
   public createTask(){
-    console.log(this.buildTask)
     this.buildTask.show()
   }
 

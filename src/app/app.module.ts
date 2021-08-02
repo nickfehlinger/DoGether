@@ -11,8 +11,11 @@ import { AngularFireModule } from '@angular/fire'
 import { AngularFireAnalyticsModule } from '@angular/fire/analytics'
 import { AngularFirestoreModule } from '@angular/fire/firestore'
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDatepickerModule } from '@angular/material/datepicker'
 import { NewTaskComponent } from './task-list/new-task/new-task.component';
 import { TaskCardComponent } from './task-list/task-card/task-card.component'
+import { MatNativeDateModule } from '@angular/material/core'
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule } from '@angular/material/form-field'
 
 @NgModule({
   declarations: [
@@ -36,9 +39,14 @@ import { TaskCardComponent } from './task-list/task-card/task-card.component'
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAnalyticsModule,
     AngularFirestoreModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {floatLabel: 'always'}}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

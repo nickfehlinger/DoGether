@@ -10,10 +10,16 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class NewTaskComponent implements OnInit {
   
-  task: FormGroup = new FormGroup({
-    title: new FormControl('')
+  public task: FormGroup = new FormGroup({
+    title: new FormControl(''),
+    every: new FormControl(''),
+    interval: new FormControl(''),
+    day: new FormControl(''),
+    beginning: new FormControl(new Date().toString())
   });
-  hidden: boolean = true
+  public repeats: boolean = false
+  public today = new Date().toString()
+  public hidden: boolean = true
 
   constructor(private store: AngularFirestore) { }
 
@@ -25,13 +31,20 @@ export class NewTaskComponent implements OnInit {
   }
 
   public show(){
-    this.hidden = false
+    this.hidden = !this.hidden
     this.reset()
+    this.task.value.beginning = this.today
   }
 
-  public newTask(){
+  public newTask() {
     const newTask = new Task
     newTask.title = this.task.value.title
+    newTask.nextOccurrence = this.task.value.beginning ? new Date(this.task.value.beginning) : new Date()
+    newTask.repeater.doesRepeat = this.repeats
+    newTask.repeater.day = this.task.value.day ? Number(this.task.value.day) : null
+    newTask.repeater.every = this.task.value.every ? Number(this.task.value.every) : null
+    newTask.repeater.interval = this.task.value.interval ? Number(this.task.value.interval) : null
+    newTask.repeater = Object.assign({}, newTask.repeater)
     return this.store.collection('tasks').add(Object.assign({}, newTask)).then(() => {
       this.hidden = true
       this.reset()

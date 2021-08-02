@@ -1,7 +1,5 @@
-<ul>
-  <task-card *ngFor="let task of tasks | async" [id]="task.payload.doc.id" [title]="task.payload.doc.data().title"
-    [completed]="task.payload.doc.data().completed"></task-card>
-</ul>
+<task-card *ngFor="let task of tasks | async" [id]="task.payload.doc.id" [title]="task.payload.doc.data().title"
+  [completed]="task.payload.doc.data().completed"></task-card>
 
 <button (click)="createTask()">Add Task</button>
 

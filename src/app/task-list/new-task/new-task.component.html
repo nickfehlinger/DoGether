@@ -1,7 +1,39 @@
 <div [hidden]="hidden">
-    <form [formGroup]="task">
-        <label for="title">Add a task</label>
-        <input type="text" formControlName='title' placeholder="New Task">
-        <button (click)="newTask()">Add</button>
-    </form>
+  <button (click)="show()">X</button>
+  <form [formGroup]="task">
+    <label for="title">Add a task</label>
+    <input type="text" formControlName='title' placeholder="New Task" required>
+    <mat-checkbox [(ngModel)]="repeats" [ngModelOptions]="{standalone: true}">Repeats?</mat-checkbox>
+    <div class="repeater" [hidden]="!repeats">
+      <label for="every">every</label>
+      <input type="number" name="every" formControlName='every' [required]="repeats">
+      <select name="interval" formControlName='interval' [required]="repeats">
+        <option default disabled>Select an interval</option>
+        <option value=1>Day(s)</option>
+        <option value=2>Week(s)</option>
+        <option value=3>Month(s)</option>
+        <option value=4>Year(s)</option>
+      </select>
+      <label for="day">On</label>
+      <select name="day" formControlName='day'>
+        <option default disabled>Select a day</option>
+        <option value="0">Sunday</option>
+        <option value="1">Monday</option>
+        <option value="2">Tuesday</option>
+        <option value="3">Wednesday</option>
+        <option value="4">Thursday</option>
+        <option value="5">Friday</option>
+        <option value="6">Saturday</option>
+      </select>
+      <label for="beginning">Starting On</label>
+      <div class="fieldGroup">
+        <input matInput [matDatepicker]="picker" formControlName="beginning" placeholder="mm/dd/yyyy">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </div>
+      <!-- <button (click)="picker.open()">Pick a date</button> -->
+
+    </div>
+    <button (click)="newTask()" [disabled]="!task.valid">Add</button>
+  </form>
 </div>

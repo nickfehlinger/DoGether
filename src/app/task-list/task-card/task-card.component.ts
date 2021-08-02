@@ -23,7 +23,10 @@ export class TaskCardComponent implements OnInit {
   }
 
   completeTask(id:string){
-    this.store.collection('tasks').doc(id).update({completed: true})
+    this.store.collection('tasks').doc(id).update({
+      completed: true,
+      previousOccurrence: new Date()
+    })
   }
 
   requestEncouragment(id:string){
