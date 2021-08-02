@@ -15,10 +15,9 @@ export class NewTaskComponent implements OnInit {
     every: new FormControl(''),
     interval: new FormControl(''),
     day: new FormControl(''),
-    beginning: new FormControl(new Date().toString())
+    beginning: new FormControl()
   });
   public repeats: boolean = false
-  public today = new Date().toString()
   public hidden: boolean = true
 
   constructor(private store: AngularFirestore) { }
@@ -33,7 +32,6 @@ export class NewTaskComponent implements OnInit {
   public show(){
     this.hidden = !this.hidden
     this.reset()
-    this.task.value.beginning = this.today
   }
 
   public newTask() {

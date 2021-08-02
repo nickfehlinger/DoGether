@@ -1,15 +1,16 @@
+import { DateTime } from "luxon"
 export class Task {
     public title: string = ''
     public completed: boolean = false
-    public previousOccurrence?: Date 
-    public nextOccurrence: Date = new Date()
+    public previousOccurrence?: DateTime | Date
+    public nextOccurrence: DateTime | Date = DateTime.now()
     public needsEncouragement: boolean = false
     public repeater: Repeater = new Repeater()
   }
 
 export class Repeater {
     public doesRepeat: boolean = false
-    public every: Number | null = null
-    public interval: Number | null = null
-    public day: Number | null = null
+    public every: number | null = null
+    public interval: number | null = null
+    public day: number | null = null
   }
