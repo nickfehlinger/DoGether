@@ -15,14 +15,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker'
 import { NewTaskComponent } from './task-list/new-task/new-task.component';
 import { TaskCardComponent } from './task-list/task-card/task-card.component'
 import { MatNativeDateModule } from '@angular/material/core'
-import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule } from '@angular/material/form-field'
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
     AppComponent,
     TaskListComponent,
     NewTaskComponent,
-    TaskCardComponent
+    TaskCardComponent,
   ],
   imports: [
     BrowserModule,

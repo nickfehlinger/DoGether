@@ -1,2 +1,30 @@
 <h1>{{title}}</h1>
-<app-task-list></app-task-list>
+<div *ngIf="auth.user | async as user;else showLogin">
+  <!-- TODO: Build user onboarding and make task list conditional
+    *ngIf="!newUser; else newUser" -->
+  <app-task-list></app-task-list>
+  <ng-template #newUser>
+    <h2>New User Onboarding</h2>
+    <h3>Let's Create Your First Task!</h3>
+    <app-new-task></app-new-task>
+  </ng-template>
+</div>
+
+<ng-template #showLogin>
+  <form [formGroup]="signIn">
+    <mat-form-field>
+      <mat-label>EMAIL</mat-label>
+      <input matInput formControlName="email">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>PASSWORD</mat-label>
+      <input matInput formControlName="password">
+    </mat-form-field>
+    <mat-form-field *ngIf="signUp">
+      <mat-label>CONFIRM PASSWORD</mat-label>
+      <input matInput formControlName="confirmPassword">
+    </mat-form-field>
+    <button mat-button>{{!signUp ? 'Sign In' : 'Sign Up'}}</button>
+  </form>
+  <button mat-button color="primary" (click)="facebookLogin()">Sign In With Facebook</button>
+</ng-template>
